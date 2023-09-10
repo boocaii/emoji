@@ -1,3 +1,10 @@
+
+# todo
+- [ ] 展示和导出更高分辨率的图片
+- [ ] 优化背景色、允许无背景
+- [ ] 优化下载文件名
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
