@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <p id="text"></p>
+
+    <script>
+      function draw() {
+        var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        console.log(isSafari);
+        document.getElementById("text").innerHTML = `${isSafari}`;
+
+        const offset_factor = isSafari ? 0.02 : 0.125;
+
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        const size = 128, fontSize = 80;
+
+        // set size
+        canvas.width = size;
+        canvas.height = size;
+        canvas.style.width = `${size}px`;
+        canvas.style.height = `${size}px`;
+
+        // draw background
+        // ctx.fillStyle = 'rgb(189, 228, 153)'
+
+        // linear gradient
+        const gradient = ctx.createLinearGradient(size/2, 0, size/2, size);
+        gradient.addColorStop(0, "rgb(209, 238, 191)")
+        gradient.addColorStop(1, "rgb(177, 228, 143)")
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(size/2, size/2, size/2, 0, Math.PI*2);
+        ctx.fill();
+        // ctx.fillRect(0, 0, size, size);
+
+        // draw emoji
+        // ctx.font = `${fontSize}px serif`;
+        // ctx.textBaseline = "middle";
+        // ctx.textAlign = "center";
+        // const 
+        //     x = (size) / 2,
+        //     y = (size) / 2 + fontSize * 0.125;
+        // ctx.fillText("👻", x, y);
+
+        var layer2 = document.createElement('canvas');
+        layer2.width = canvas.width;
+        layer2.height = canvas.height;
+        var ctx2 = layer2.getContext('2d');
+
+        // 在第二个图层上绘制图形
+        // ctx2.fillStyle = 'blue';
+        // ctx2.fillRect(0, 0, size, size);
+        ctx2.font = `${fontSize}px serif`;
+        ctx2.textBaseline = "middle";
+        ctx2.textAlign = "center";
+        const 
+            x = (size) / 2,
+            y = (size) / 2 + fontSize * offset_factor;
+            ctx2.fillStyle = 'white';
+        ctx2.fillText("😀", x, y);
+
+        ctx.drawImage(layer2, 0, 0, size, size, 0, 0, size, size);
+      }
+
+      draw();
+    </script>
+  </body>
+</html>
