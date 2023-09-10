@@ -10,7 +10,7 @@ import "./App.css";
 
 const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 const offsetFactor = isSafari ? 0.02 : 0.125;
-const GradientColorPairs = [["rgb(191, 241, 196)", "rgb(146, 228, 149)"]];
+// const GradientColorPairs = [["rgb(191, 241, 196)", "rgb(146, 228, 149)"]];
 
 const PureColors = [
   "#9b9faa",
@@ -34,15 +34,15 @@ const PureColors = [
 ];
 
 function App() {
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  // const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [emoji, setEmoji] = useState<Emoji | null>(null);
   const [colorIdx, setColorIdx] = useState(0);
 
   const handleDownload = () => {
-    let canvas = document.getElementById('canvas');
-    let ctx = canvas!.getContext('2d');
+    let canvas = document.getElementById('canvas') as HTMLCanvasElement;
+    // let ctx = canvas!.getContext('2d');
     // Convert our canvas to a data URL
-    let canvasUrl = canvas.toDataURL('image/png');
+    let canvasUrl = canvas!.toDataURL('image/png');
     // Create an anchor, and set the href value to our data URL
     const createEl = document.createElement('a');
     createEl.href = canvasUrl;
@@ -61,6 +61,7 @@ function App() {
         <div className="">
           <EmojiAvatar
             size={160}
+            // @ts-ignore
             emoji={emoji ? emoji.native : "👻"}
             color={PureColors[colorIdx]}
           />
@@ -79,7 +80,7 @@ function App() {
         <TabsContent value="emoji" style={{ height: "200px" }}>
           <Picker
             data={data}
-            onEmojiSelect={(val) => {
+            onEmojiSelect={(val: any) => {
               setEmoji(val);
             }}
             previewPosition="none"
